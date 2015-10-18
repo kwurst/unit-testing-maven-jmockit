@@ -28,12 +28,14 @@ public class GradeTest {
 	Grade g1;
 	Grade g2;
 	Grade g3;
+	Grade g4;
 
 	@Before
 	public void setUp() throws Exception {
 		g1 = new Grade("A");
 		g2 = new Grade("A");
 		g3 = new Grade("A-");
+		g4 = new Grade("E");
 	}
 
 	@Test
@@ -46,6 +48,11 @@ public class GradeTest {
 	public void testGetNumericGrade() {
 		assertEquals(g1.getNumericGrade(), 4.0, 0.0);
 		assertNotEquals(g3.getNumericGrade(), 4.0, 0.0);
+	}
+	
+	@Test
+	public void testHashCode () {
+		assertNotNull(g4.hashCode());
 	}
 	
 	@Test
