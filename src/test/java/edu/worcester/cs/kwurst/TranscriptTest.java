@@ -9,6 +9,11 @@ import edu.worcester.cs.kwurst.Transcript.Semester;
 
 public class TranscriptTest {
 
+
+	@Mocked Transcript transcript;
+	Student student;
+	Grade grade;
+
 	private Transcript t1;
 	private Student student1;
 	private Student student2;
@@ -33,26 +38,28 @@ public class TranscriptTest {
 
 	@Test
 	public void testGpa() {
-		assertEquals(0.0, t1.getGpa(), 0.0);
-		t1.addCourse(
+		new Expectations() {{
+			new Transcript();
+			transcript.addCourse(
+					new Course("CS", 443, "Software Quality Assurance and Testing", 3), 
+					Transcript.Semester.FALL, 2015, new Grade("A"));
+			transcript.getGpa(); returns(4.0);
+		}};
+		
+		student = new Student("Sue", "Storm");
+		student.addCourse(
 				new Course("CS", 443, "Software Quality Assurance and Testing", 3), 
 				Transcript.Semester.FALL, 2015, new Grade("A"));
-		assertEquals(4.0, t1.getGpa(), 0.0);
-		t1.addCourse(
-				new Course("CS", 448, "Software Development Capstone", 3), 
-				Transcript.Semester.FALL, 2015, new Grade("C"));
-		assertEquals(3.0, t1.getGpa(), 0.0);
-		t1.addCourse(
-				new Course("CS", 348, "Software Process Management", 3), 
-				Transcript.Semester.FALL, 2015, new Grade("IP"));
-		assertEquals(3.0, t1.getGpa(), 0.0);	
-	}  
+		assertEquals(4.0, student.getGpa(), 0.0);
 	
-	@Test
-	public void testMajorComplete(){
-		student1.setMajorComplete(true);
-		assertTrue(student1.getMajorComplete());
-	}
+		new VerificationsInOrder() {{
+			new Transcript();
+			transcript.addCourse(
+					new Course("CS", 443, "Software Quality Assurance and Testing", 3), 
+					Transcript.Semester.FALL, 2015, new Grade("A"));
+			transcript.getGpa();
+		}};
+	}  
 	
 	@Test
 	public void testGetLetterGrade(){
