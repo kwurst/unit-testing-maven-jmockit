@@ -14,7 +14,7 @@ import mockit.VerificationsInOrder;
 public class StudentTest {
 	@Mocked Transcript transcript;
 	Student student;
-	Course course;
+	
 
 	@Before
 	public void setUp() throws Exception {
