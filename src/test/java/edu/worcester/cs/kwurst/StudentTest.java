@@ -14,6 +14,7 @@ import mockit.VerificationsInOrder;
 public class StudentTest {
 	@Mocked Transcript transcript;
 	Student student;
+	Course course;
 
 	@Before
 	public void setUp() throws Exception {
@@ -22,7 +23,7 @@ public class StudentTest {
 	
 	@Test
 	public void testStudentCount() {
-		assertEquals(3, student.getStudentCount(), 0.0);
+		assertEquals(9, Student.getStudentCount(), 0.0);
 	}
 	
 	@Test
@@ -56,7 +57,12 @@ public class StudentTest {
 			transcript.getCurrentEarnedCr(); returns(100);
 		}};
 		student = new Student("Sue", "Storm");
-		assertEquals(100, transcript.getCurrentEarnedCr());
+		assertEquals(100, student.getCurrentEarnedCr());
+
+	
+		new VerificationsInOrder() {{
+		transcript.getCurrentEarnedCr();
+	}};
 	}
 	
 	@Test
@@ -73,7 +79,7 @@ public class StudentTest {
 	@Test
 	public void testID() {
 		student = new Student("Sue", "Storm");
-		assertEquals("0000003", student.getId());
+		assertEquals("0000005", student.getId());
 	}
 	
 	
@@ -82,8 +88,12 @@ public class StudentTest {
 		new Expectations() {{
 			transcript.getAnticipatedAdditionalCr(); returns(28);
 		}};
+		student = new Student("Sue", "Storm");
+		assertEquals(28, student.getAnticipatedAdditionalCr());
 		
-		assertEquals(28, transcript.getAnticipatedAdditionalCr());
+		new VerificationsInOrder() {{
+			transcript.getAnticipatedAdditionalCr();
+		}};
 	}
 	
 	@Test
@@ -91,7 +101,12 @@ public class StudentTest {
 		new Expectations() {{
 			transcript.getLascComplete(); returns(true);
 		}};
-		assertTrue(transcript.getLascComplete());
+		student = new Student("Sue", "Storm");
+		assertTrue(student.getLascComplete());
+		
+		new VerificationsInOrder() {{
+			transcript.getLascComplete();
+		}};
 	}
 	
 	@Test
@@ -99,8 +114,14 @@ public class StudentTest {
 		new Expectations() {{
 			transcript.getMajorComplete(); returns(true);
 		}};
-		
-		assertTrue(transcript.getMajorComplete() == true);
+		student = new Student("Sue", "Storm");
+		assertTrue(student.getMajorComplete() == true);
+
+	
+	new VerificationsInOrder() {{
+		transcript.getMajorComplete();
+	}};
+	
 	}
 	
 	@Test
@@ -108,8 +129,12 @@ public class StudentTest {
 		new Expectations() {{
 			transcript.getCurrentRemainingCr(); returns(32);
 		}};
+		student = new Student("Sue", "Storm");
+		assertEquals(32, student.getCurrentRemainingCr());
 		
-		assertEquals(32, transcript.getCurrentRemainingCr());
+		new VerificationsInOrder() {{
+			transcript.getCurrentRemainingCr();
+		}};
 	}
 	
 	@Test
@@ -117,8 +142,12 @@ public class StudentTest {
 		new Expectations() {{
 			transcript.getAnticipatedRemainingCr(); returns(44);
 		}};
+		student = new Student("Sue", "Storm");
+		assertEquals(44, student.getAnticipatedRemainingCr());
 		
-		assertEquals(44, transcript.getAnticipatedRemainingCr());
+		new VerificationsInOrder() {{
+			transcript.getAnticipatedRemainingCr();
+		}};
 	}
 	
 	@Test
@@ -126,8 +155,12 @@ public class StudentTest {
 		new Expectations() {{
 			transcript.readyToGraduate(); returns(true);
 		}};
+		student = new Student("Sue", "Storm");
+		assertTrue(student.readyToGraduate() == true);
 		
-		assertTrue(transcript.readyToGraduate() == true);
+		new VerificationsInOrder() {{
+			transcript.readyToGraduate();
+		}};
 	}
 	
 	@Test
@@ -135,9 +168,14 @@ public class StudentTest {
 		new Expectations() {{
 			transcript.getTranscript(); returns("Calculus" + "\n" + "Data Mining");
 		}};
+		student = new Student("Sue", "Storm");
+		assertEquals("Calculus" + "\n" + "Data Mining", student.getTranscript());
 		
-		assertEquals("Calculus" + "\n" + "Data Mining", transcript.getTranscript());
+		new VerificationsInOrder() {{
+			transcript.getTranscript();
+		}};
 	}
+	
 	
 	
 }
