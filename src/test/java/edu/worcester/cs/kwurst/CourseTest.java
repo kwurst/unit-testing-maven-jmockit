@@ -1,5 +1,5 @@
 package edu.worcester.cs.kwurst;
-
+ 
 /*
  * Copyright (C) 2015 Karl R. Wurst
  *
@@ -45,5 +45,23 @@ public class CourseTest {
 		c1.setNumber(448);
 		assertEquals(c1.getNumber(), 448);
 	}
+	
+	@Test
+	public void testTitle() {
+		assertEquals(c1.getTitle(), "Software Quality Assurance and Testing");
+		c1.setTitle("Test Title");
+		assertEquals(c1.getTitle(), "Test Title");
+	}
+	
+	@Test
+	public void testCredits() {
+		assertEquals(c1.getCredits(), 3);
+		c1.setCredits(4);
+		assertEquals(c1.getCredits(), 4);
+	}
+	
+	
+	
+	
 
 }
